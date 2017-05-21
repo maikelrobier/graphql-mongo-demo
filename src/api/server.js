@@ -2,7 +2,9 @@ import path from 'path'
 import express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
-import ToDo from './models/todo.js'
+import ToDo from './models/todo'
+import schema from './graphql/schema'
+import graphqlHTTP from 'express-graphql'
 
 const DB_PORT = 27017
 const SERVER_PORT = 3030
@@ -77,6 +79,14 @@ app.post('/rest', async (req, res) => {
   //   res.redirect('/')
   // })
 })
+
+app.get('/graphql', graphqlHTTP(req => ({
+ schema,
+ graphiql: true,
+})))
+app.post('/graphql', graphqlHTTP(req => ({
+ schema,
+})))
 
 app.listen(SERVER_PORT, () => {
   console.log(`++Express Server is Running on port ${SERVER_PORT}`)
