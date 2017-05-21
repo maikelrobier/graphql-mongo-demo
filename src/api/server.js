@@ -1,44 +1,83 @@
 import path from 'path'
+import express from 'express'
 import mongoose from 'mongoose'
+import bodyParser from 'body-parser'
+import ToDo from './models/todo.js'
 
-const express = require('express')
+const DB_PORT = 27017
+const SERVER_PORT = 3030
+
 const app = express()
-const ToDo = require('./models/todo.js')
 
-const SERVER_PORT = 27017
-
-mongoose.connect(`mongodb://localhost:${SERVER_PORT}/local`)
+mongoose.connect(`mongodb://localhost:${DB_PORT}/local`)
 
 const db = mongoose.connection
 
-db.on('error', ()=> {
+db.on('error', () => {
   console.log( '--FAILED to connect to mongoose')
 })
 
 db.once('open', () => {
- console.log( '++connected to mongoose')
+  console.log( '++connected to mongoose')
 })
 
-app.listen(3030,()=> {
-  console.log(`++Express Server is Running on port ${SERVER_PORT}`)
+// middlewares
+
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json());
+
+const promise = () => new Promise((resolve) => {
+  setTimeout(() => resolve('resolved!'), 3000)
 })
 
-app.get('/',(req,res)=>{
- res.send('server runnig')
+// routes
+
+app.get('/', (req,res) => {
+  res.send('server runnig')
 })
 
-app.post('/rest', (req, res)=>{
-  var todoItem = new ToDo({
+const createTodo = async (data) => {
+  let result
+  try {
+    result = await promise()
+    console.log('ok: ', result)
+  } catch (e) {
+    console.log('--error: ', e)
+  }
+
+  return result
+}
+
+app.get('/rest', async (req, res) => {
+  const list = await ToDo.find({})
+
+  res.json(list)
+})
+
+app.post('/rest', async (req, res) => {
+  console.log('BODY: ', req.body)
+  const todoItem = new ToDo({
     itemId: 1,
     item: req.body.item || 'Todo Text',
     completed: false,
   })
-  todoItem.save((err,result)=> {
-    if (err) {
-      console.log("--TodoItem save failed " + err)
-      return
-    }
-    console.log("+++TodoItem saved successfully " + todoItem.item)
-    res.redirect('/')
-  })
+  const todo = {
+    itemId: 1,
+    item: 'Hello',
+    completed: false,
+  }
+  const created = await createTodo(todo)
+  res.json(created)
+  // todoItem.save((err,result)=> {
+  //   if (err) {
+  //     console.log("--TodoItem save failed " + err)
+  //     return
+  //   }
+  //   console.log("+++TodoItem saved successfully " + todoItem.item)
+  //   res.redirect('/')
+  // })
+})
+
+app.listen(SERVER_PORT, () => {
+  console.log(`++Express Server is Running on port ${SERVER_PORT}`)
 })
