@@ -1,0 +1,24 @@
+{
+  "name": "graphql-js-playground",
+  "version": "0.1.0",
+  "description": "Try GraphQL stuff",
+  "main": "index.js",
+  "author": "maikelrobier",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.3",
+    "graphql": "^0.9.6",
+    "mongoose": "^4.10.0"
+  },
+  "scripts": {
+    "run-server": "babel-node src/api/server.js",
+    "build": "babel . -d dist --ignore=\"node_modules\""
+  },
+  "devDependencies": {
+    "babel-cli": "*",
+    "babel-core": "*",
+    "babel-preset-es2015-node5": "*",
+    "babel-preset-stage-3": "*",
+    "babel-register": "*"
+  }
+}
