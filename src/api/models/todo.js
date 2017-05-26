@@ -4,9 +4,9 @@ const Schema = mongoose.Schema
 
 const toDoSchema = new Schema({
   itemId: Number,
-  item: String,
+  text: String,
   completed: Boolean
-}, { collection: 'TodoList' })
+}, { collection: 'Todos' })
 
 const ToDo = mongoose.model('ToDo', toDoSchema)
 
