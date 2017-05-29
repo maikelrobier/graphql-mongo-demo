@@ -5,7 +5,7 @@ import {
 import { Person } from '../../models'
 import { PersonType } from '../types'
 import { mutationWithClientMutationId } from '../../utils/relay'
-import PersonModelToGraphType from '../../mappings/person-mapping.js'
+import { mongoObjectToGraph } from '../../utils/mongo'
 
 export default mutationWithClientMutationId({
   name: 'PersonCreateMutation',
@@ -33,7 +33,7 @@ export default mutationWithClientMutationId({
         email,
       })
 
-      const parsed = PersonModelToGraphType(result)
+      const parsed = mongoObjectToGraph(result)
 
       return {
         person: parsed,

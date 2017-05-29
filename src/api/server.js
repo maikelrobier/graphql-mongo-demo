@@ -2,7 +2,6 @@ import path from 'path'
 import express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
-import ToDo from './models/todo'
 import schema from './graphql/schema'
 import { /*buildSchema,*/ printSchema } from 'graphql'
 import graphqlHTTP from 'express-graphql'
@@ -10,10 +9,6 @@ import {
   toGlobalId,
   fromGlobalId,
 } from './utils/relay'
-
-// const gid = toGlobalId('Person', '592c55da1611b082fe5957af')
-// console.log('here')
-// console.log(fromGlobalId(gid))
 
 import * as RelayUtils from './utils/relay'
 
@@ -47,11 +42,11 @@ app.get('/', (req,res) => {
   res.send('server runnig')
 })
 
-app.get('/rest', async (req, res) => {
-  const list = await ToDo.find({})
-
-  res.json(list)
-})
+// app.get('/rest', async (req, res) => {
+//   const list = await ToDo.find({})
+//
+//   res.json(list)
+// })
 
 app.post('/rest', async (req, res) => {
   console.log('BODY: ', req.body)
