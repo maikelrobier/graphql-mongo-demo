@@ -3,8 +3,8 @@ import {
   GraphQLSchema
 } from 'graphql';
 
-import mutations from './mutations';
-import queries from './queries';
+import * as mutations from './mutations';
+import * as queries from './queries';
 
 export default new GraphQLSchema({
   query: new GraphQLObjectType({

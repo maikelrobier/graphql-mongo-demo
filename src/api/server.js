@@ -6,8 +6,18 @@ import ToDo from './models/todo'
 import schema from './graphql/schema'
 import { /*buildSchema,*/ printSchema } from 'graphql'
 import graphqlHTTP from 'express-graphql'
+import {
+  toGlobalId,
+  fromGlobalId,
+} from './utils/relay'
 
-console.log(printSchema(schema))
+// const gid = toGlobalId('Person', '592c55da1611b082fe5957af')
+// console.log('here')
+// console.log(fromGlobalId(gid))
+
+import * as RelayUtils from './utils/relay'
+
+// console.log(printSchema(schema))
 
 const DB_PORT = 27017
 const SERVER_PORT = 3030

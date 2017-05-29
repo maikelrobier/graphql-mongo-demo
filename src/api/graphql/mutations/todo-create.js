@@ -1,16 +1,11 @@
-import {
-  GraphQLNonNull,
-  GraphQLBoolean,
-  GraphQLString,
-} from 'graphql';
-
 import ToDo from '../../models/todo'
 import {
   ToDoCreateInput,
   ToDoCreatePayload,
 } from '../types'
+import ToDoModelToGraphType from '../../mappings/todo-mapping.js'
 
-const todoCreate = {
+export default {
   type: ToDoCreatePayload,
   args: {
     input: {
@@ -20,16 +15,12 @@ const todoCreate = {
   },
   async resolve (root, params, options) {
 
-    console.log('params', params)
-
     const input = {
       ...params.input,
       completed: params.input.completed || false,
     }
 
     const created = await ToDo.create(input)
-
-    console.log(created)
 
     const result = {
       todo: {
@@ -39,10 +30,6 @@ const todoCreate = {
       }
     }
 
-    console.log(result)
-
-    return result
+    return ToDoModelToGraphType(result)
   }
 }
-
-export default todoCreate

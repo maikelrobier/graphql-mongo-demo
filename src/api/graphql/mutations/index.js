@@ -1,5 +1,7 @@
 import todoCreate from './todo-create'
+import personCreate from './person-create'
 
-export default {
+export {
+  personCreate,
   todoCreate,
 }

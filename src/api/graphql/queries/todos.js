@@ -2,15 +2,14 @@ import _ from 'lodash'
 import {
   GraphQLList,
 } from 'graphql'
-
 import ToDo from '../../models/todo'
 import { ToDoType } from '../types'
 import ToDoModelToGraphType from '../../mappings/todo-mapping.js'
 import getProjection from '../../utils/get-projection'
 
-const todos = {
+export default {
   type: new GraphQLList(ToDoType),
-  resolve: async (root, { itemId }, source, fieldASTs) => {
+  resolve: async (root, args, source, fieldASTs) => {
     const projections = getProjection(fieldASTs)
     try {
       const result = await ToDo.find(null, projections)
@@ -23,5 +22,3 @@ const todos = {
     }
   }
 }
-
-export default todos

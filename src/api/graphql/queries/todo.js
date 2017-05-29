@@ -9,7 +9,7 @@ import { ToDoType } from '../types'
 import ToDoModelToGraphType from '../../mappings/todo-mapping.js'
 import getProjection from '../../utils/get-projection'
 
-const todo = {
+export default {
   type: ToDoType,
   args: {
     itemId: {
@@ -20,6 +20,7 @@ const todo = {
   resolve: async (root, { itemId }, source, fieldASTs) => {
     const projections = getProjection(fieldASTs)
     try {
+      // TODO: search by id
       const result = await ToDo.find(null, projections)
 
       return ToDoModelToGraphType(_.first(result))
@@ -30,5 +31,3 @@ const todo = {
     }
   }
 }
-
-export default todo
