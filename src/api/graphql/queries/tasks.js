@@ -2,16 +2,16 @@ import _ from 'lodash'
 import {
   GraphQLList,
 } from 'graphql'
-import Person from '../../models'
-import { PersonType } from '../types'
-import { getProjection, mongoObjectToGraph} from '../../utils/mongo'
+import Task from '../../models'
+import { TaskType } from '../types'
+import { getProjection, mongoObjectToGraph } from '../../utils/mongo'
 
 export default {
-  type: new GraphQLList(PersonType),
+  type: new GraphQLList(TaskType),
   resolve: async (root, args, source, fieldASTs) => {
     const projections = getProjection(fieldASTs)
     try {
-      const result = await Person.find(null, projections)
+      const result = await Task.find(null, projections)
 
       return _.map(result, mongoObjectToGraph)
     } catch(e) {

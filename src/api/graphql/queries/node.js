@@ -5,7 +5,6 @@ import {
 } from '../../utils/relay'
 import * as models from '../../models'
 import * as types from '../types'
-import * as Relay from '../../utils/relay'
 
 const {
   nodeField,

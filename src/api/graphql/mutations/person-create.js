@@ -2,7 +2,7 @@ import {
   GraphQLNonNull,
   GraphQLString,
 } from 'graphql'
-import Person from '../../models/person'
+import { Person } from '../../models'
 import { PersonType } from '../types'
 import { mutationWithClientMutationId } from '../../utils/relay'
 import PersonModelToGraphType from '../../mappings/person-mapping.js'

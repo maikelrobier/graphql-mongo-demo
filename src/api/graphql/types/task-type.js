@@ -11,7 +11,7 @@ import {
   connectionFromArray,
 } from '../../utils/relay'
 import PersonType from './person-type'
-import Person from '../../models'
+import { Person } from '../../models'
 import { NodeInterface } from '../queries/node'
 
 const { connectionType: PersonConnection } = connectionDefinitions({ nodeType: PersonType })

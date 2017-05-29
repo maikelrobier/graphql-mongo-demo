@@ -1,4 +1,4 @@
-import ToDo from '../../models/todo'
+import { ToDo } from '../../models'
 import {
   ToDoCreateInput,
   ToDoCreatePayload,

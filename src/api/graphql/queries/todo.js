@@ -3,11 +3,10 @@ import {
   GraphQLNonNull,
   GraphQLString,
 } from 'graphql'
-
 import ToDo from '../../models/todo'
 import { ToDoType } from '../types'
 import ToDoModelToGraphType from '../../mappings/todo-mapping.js'
-import getProjection from '../../utils/get-projection'
+import { getProjection } from '../../utils/mongo'
 
 export default {
   type: ToDoType,
