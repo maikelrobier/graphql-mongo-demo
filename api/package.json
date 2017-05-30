@@ -15,7 +15,7 @@
     "mongoose": "^4.10.0"
   },
   "scripts": {
-    "run-server": "babel-node src/api/server.js",
+    "run-server": "babel-node server.js",
     "build": "babel . -d dist --ignore=\"node_modules\""
   },
   "devDependencies": {
