@@ -1,14 +1,42 @@
 import _ from 'lodash'
+import graphqlFields from 'graphql-fields'
+
 /**
-* generate projection object for mongoose
+* generate field selection string for mongoose
 * @param  {Object} fieldASTs
-* @return {Project}
+* @return {String} selection
 */
 export function getProjection(fieldASTs) {
-  return fieldASTs.fieldNodes[0].selectionSet.selections.reduce((projections, selection) => {
-    projections[selection.name.value] = true;
-    return projections;
-  }, {})
+  let fields = graphqlFields(fieldASTs)
+
+  console.log('*** fields ***')
+  console.log(fields)
+
+  if (fields.edges) { // for connections
+    fields = fields.edges.node
+  }
+
+  const root = {
+    path: [],
+    node: fields,
+  }
+  const selections = []
+  const queue = [root]
+  while(queue.length) {
+    const current = queue.shift()
+    const keys = Object.keys(current.node)
+    if (!keys.length) { // leaf
+      selections.push(current.path.join('.'))
+    }
+    _.each(keys, key => {
+      queue.push({
+        path: [...current.path, key],
+        node: current.node[key],
+      })
+    })
+  }
+
+  return selections.join(' ')
 }
 
 export function mongoObjectToGraph(object) {
