@@ -13,8 +13,7 @@ import {
 import PersonType from './person-type'
 import { Person } from '../../models'
 import { NodeInterface } from '../queries/node'
-
-const { connectionType: PersonConnection } = connectionDefinitions({ nodeType: PersonType })
+import PersonConnection from './person-connection'
 
 const TaskType = new GraphQLObjectType({
   name: 'Task',
@@ -34,6 +33,9 @@ const TaskType = new GraphQLObjectType({
       name: 'assignees',
       type: PersonConnection,
       args: connectionArgs,
+      // TODO: dont just send all persons, select persons for this task
+      // TODO: optimize: use projections
+      // TODO: maybe pull this resolve() out and reuse it here and in the persons query
       resolve: async (task, args) => connectionFromArray(await Person.find(null), args),
     },
   },

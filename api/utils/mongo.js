@@ -9,9 +9,6 @@ import graphqlFields from 'graphql-fields'
 export function getProjection(fieldASTs) {
   let fields = graphqlFields(fieldASTs)
 
-  console.log('*** fields ***')
-  console.log(fields)
-
   if (fields.edges) { // for connections
     fields = fields.edges.node
   }

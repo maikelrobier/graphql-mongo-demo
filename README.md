@@ -1,5 +1,7 @@
 # Hello
 
+mongod --dbpath ~/Databases/mongo
+
 ## TODO
 - Add eslint
 - Try interfaces, add Node interface with global `id` field

@@ -21,7 +21,6 @@ export default mutationWithClientMutationId({
   },
   mutateAndGetPayload: async (input) => {
     try {
-      console.log(input)
       const result = await Task.create(input)
 
       return {

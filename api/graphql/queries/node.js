@@ -15,12 +15,7 @@ const {
 
     assert(models[type])
 
-    const object = await models[type].findById(id)
-
-    console.log(`node(${globalId}) [${type}:${id}]`)
-    console.log('Object: ', object)
-
-    return object
+    return await models[type].findById(id)
   },
   (object) => {
     return object.getTypeName()

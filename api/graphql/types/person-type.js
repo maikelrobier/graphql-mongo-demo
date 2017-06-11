@@ -7,6 +7,7 @@ import {
 import { globalIdField } from '../../utils/relay'
 import { NodeInterface } from '../queries/node'
 
+// TODO: add field: list of persons tasks (connection)
 const PersonType = new GraphQLObjectType({
   name: 'Person',
   description: 'A Person',
