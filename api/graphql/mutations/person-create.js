@@ -1,7 +1,4 @@
-import {
-  GraphQLNonNull,
-  GraphQLString,
-} from 'graphql'
+import { GraphQLNonNull, GraphQLString } from 'graphql'
 import { Person } from '../../models'
 import { PersonType } from '../types'
 import { mutationWithClientMutationId } from '../../utils/relay'
@@ -38,7 +35,7 @@ export default mutationWithClientMutationId({
       return {
         person: parsed,
       }
-    } catch (e) {
+    } catch (err) {
       console.log(err)
 
       return null

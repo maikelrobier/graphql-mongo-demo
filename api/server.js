@@ -4,7 +4,7 @@ import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import schema from './graphql/schema'
-import { /*buildSchema,*/ printSchema } from 'graphql'
+import { printSchema } from 'graphql'
 import graphqlHTTP from 'express-graphql'
 import {
   toGlobalId,
@@ -12,8 +12,6 @@ import {
 } from './utils/relay'
 
 import * as RelayUtils from './utils/relay'
-
-// console.log(printSchema(schema))
 
 const DB_PORT = 27017
 const SERVER_PORT = 3030
@@ -33,10 +31,7 @@ db.once('open', () => {
 })
 
 // middlewares
-// const corsOptions = {
-//   optionsSuccessStatus: 200,
-// }
-// app.options('*', cors())
+
 app.use(cors())
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
@@ -44,14 +39,8 @@ app.use(bodyParser.json());
 // routes
 
 app.get('/', (req,res) => {
-  res.send('server runnig')
+  res.send('Server runnig')
 })
-
-// app.get('/rest', async (req, res) => {
-//   const list = await ToDo.find({})
-//
-//   res.json(list)
-// })
 
 app.post('/rest', async (req, res) => {
   console.log('BODY: ', req.body)
@@ -62,7 +51,6 @@ app.post('/rest', async (req, res) => {
 
 app.get('/graphql', graphqlHTTP(req => ({
  schema,
- // rootValue: root,
  graphiql: true,
 })))
 

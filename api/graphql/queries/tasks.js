@@ -1,10 +1,8 @@
 import _ from 'lodash'
-import {
-  GraphQLList,
-} from 'graphql'
+import { GraphQLList } from 'graphql'
+import { getProjection, mongoObjectToGraph } from '../../utils/mongo'
 import { Task } from '../../models'
 import { TaskType } from '../types'
-import { getProjection, mongoObjectToGraph } from '../../utils/mongo'
 
 export default {
   type: new GraphQLList(TaskType),

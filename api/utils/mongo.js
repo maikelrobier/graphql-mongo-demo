@@ -36,9 +36,9 @@ export function getProjection(fieldASTs) {
   return selections.join(' ')
 }
 
-export function mongoObjectToGraph(object) {
+export function mongoObjectToGraph(document) {
   return {
-    ..._.omit(object, '_id'),
-    id: object._id,
+    ..._.omit(document.toObject(), '_id'),
+    id: document._id.toString(),
   }
 }

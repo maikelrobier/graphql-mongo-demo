@@ -19,6 +19,7 @@ class RandomDie {
     return output;
   }
 }
+
 // Construct a schema, using GraphQL schema language
 var schema = buildSchema(`
   type RandomDie {

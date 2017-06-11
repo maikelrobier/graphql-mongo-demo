@@ -1,7 +1,4 @@
-import {
-  GraphQLNonNull,
-  GraphQLString,
-} from 'graphql'
+import { GraphQLNonNull, GraphQLString } from 'graphql'
 import { Task } from '../../models'
 import { TaskType } from '../types'
 import { mongoObjectToGraph } from '../../utils/mongo'

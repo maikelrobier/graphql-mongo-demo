@@ -3,16 +3,16 @@ import {
   GraphQLNonNull,
   GraphQLString,
   GraphQLBoolean,
+  GraphQLList,
 } from 'graphql'
 import { globalIdField } from '../../utils/relay'
 import { NodeInterface } from '../queries/node'
 
-// TODO: add field: list of persons tasks (connection)
 const PersonType = new GraphQLObjectType({
   name: 'Person',
   description: 'A Person',
   interfaces: [NodeInterface],
-  fields: {
+  fields: () => ({
     id: globalIdField(),
     firstName: {
       type: new GraphQLNonNull(GraphQLString),
@@ -26,7 +26,11 @@ const PersonType = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'Person\'s email',
     },
-  },
+    tasks: {
+      type: new GraphQLList(require('./task-type').default), // workaround for circular dep
+      description: 'List of tasks assigned to this person',
+    },
+  }),
 })
 
 export default PersonType

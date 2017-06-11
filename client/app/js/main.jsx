@@ -12,8 +12,15 @@ class App extends Component {
       <div>
         <p>Hello, World!</p>
         <ul>
-          {_.map(persons, ({ firstName, id, lastName }) => (
-            <li key={_.uniqueId()}>{firstName} {lastName}</li>
+          {_.map(persons, ({ firstName, id, lastName, tasks }) => (
+            <li key={_.uniqueId()}>
+              <div>{firstName} {lastName}</div>
+              <ul>
+                {_.map(tasks, ({ title, completed, id: taskId }) => (
+                  <li key={taskId}>{title} {completed ? '(X)' : '( )'}</li>
+                ))}
+              </ul>
+            </li>
           ))}
         </ul>
       </div>
@@ -32,6 +39,11 @@ const Application = Relay.createContainer(App, {
             firstName
             id
             lastName
+            tasks {
+              id
+              title
+              completed
+            }
           }
         }
       }
