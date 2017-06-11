@@ -23,9 +23,7 @@ const {
     return object
   },
   (object) => {
-    // TODO: how to know the type of any mongo object
-    console.log('TYPE?: ', object)
-    return types.PersonType
+    return object.getTypeName()
   }
 )
 

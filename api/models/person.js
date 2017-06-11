@@ -8,6 +8,10 @@ const personSchema = new Schema({
   email: String,
 }, { collection: 'Persons' })
 
+personSchema.methods = {
+  getTypeName: () => 'Person'
+}
+
 const Person = mongoose.model('Person', personSchema)
 
 export default Person

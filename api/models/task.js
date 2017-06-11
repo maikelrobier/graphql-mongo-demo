@@ -11,6 +11,10 @@ const taskSchema = new Schema({
   }],
 }, { collection: 'Tasks' })
 
+taskSchema.methods = {
+  getTypeName: () => 'Task'
+}
+
 const Task = mongoose.model('Task', taskSchema)
 
 export default Task

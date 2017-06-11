@@ -2,6 +2,7 @@ import path from 'path'
 import express from 'express'
 import mongoose from 'mongoose'
 import bodyParser from 'body-parser'
+import cors from 'cors'
 import schema from './graphql/schema'
 import { /*buildSchema,*/ printSchema } from 'graphql'
 import graphqlHTTP from 'express-graphql'
@@ -33,6 +34,7 @@ db.once('open', () => {
 
 // middlewares
 
+app.use(cors())
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 

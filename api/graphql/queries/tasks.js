@@ -2,7 +2,7 @@ import _ from 'lodash'
 import {
   GraphQLList,
 } from 'graphql'
-import Task from '../../models'
+import { Task } from '../../models'
 import { TaskType } from '../types'
 import { getProjection, mongoObjectToGraph } from '../../utils/mongo'
 
