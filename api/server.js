@@ -33,7 +33,10 @@ db.once('open', () => {
 })
 
 // middlewares
-
+// const corsOptions = {
+//   optionsSuccessStatus: 200,
+// }
+// app.options('*', cors())
 app.use(cors())
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
